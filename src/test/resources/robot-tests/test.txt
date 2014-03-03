@@ -1,0 +1,7 @@
+*** Settings ***
+Library  Selenium2Library
+
+*** Test Cases ***
+My Test
+   Open Browser  http://www.baidu.com
+   Close Browser
