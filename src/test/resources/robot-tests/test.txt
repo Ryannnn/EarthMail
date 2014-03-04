@@ -1,7 +1,22 @@
 *** Settings ***
+Documentation  This is your first test
 Library  Selenium2Library
 
 *** Test Cases ***
-My Test
-   Open Browser  http://www.baidu.com
+Start Send Page
+   Open Browser  http://localhost:8080/EarthMail
+   Page Should Contain Textfield  id=topic
+   Page Should Contain Textfield  id=recipients
+   Page Should Contain Textfield  id=body
+   Page Should contain Button  id=send  value=Send
+   
+   Input Text  topic  test1
+   Input Text  recipients  csd@chaifeng.com
+   Input Text  body  test1
+   
+   Click Button  send
+                        
+ 
+
    Close Browser
+   
