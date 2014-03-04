@@ -22,40 +22,33 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-        <groupId>org.hsqldb</groupId>
-        <artifactId>hsqldb</artifactId>
-        <version>1.8.0.10</version>
-      </dependency>
-      <dependency>
-    	<groupId>com.github.markusbernhardt</groupId>
-    	<artifactId>robotframework-selenium2library-java</artifactId>
-    	<version>1.4.0.4</version>
-    	<scope>test</scope>
-	</dependency>	
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>1.8.0.10</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.markusbernhardt</groupId>
+	  <artifactId>robotframework-selenium2library-java</artifactId>
+	  <version>1.4.0.4</version>
+	  <scope>test</scope>
+  </dependency>
   </dependencies>
   <build>
     <finalName>EarthMail</finalName>
     <plugins>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.1</version>
+        <groupId>org.robotframework</groupId>
+        <artifactId>robotframework-maven-plugin</artifactId>
+        <version>1.4.1</version>
         <executions>
           <execution>
-            <phase>test</phase>
             <goals>
-              <goal>exec</goal>
+              <goal>run</goal>
             </goals>
           </execution>
         </executions>
         <configuration>
-          <executable>pybot</executable>
-          <workingDirectory>.</workingDirectory>
-          <arguments>
-            <argument>-d</argument>
-            <argument>target/robot</argument>
-            <argument>src/test/resources/robot-tests/**.txt</argument>
-          </arguments>
+          <testCasesDirectory>${project.basedir}/src/test/resources/robot-tests</testCasesDirectory>
         </configuration>
       </plugin>
     </plugins>
