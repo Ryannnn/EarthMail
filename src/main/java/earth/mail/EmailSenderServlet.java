@@ -42,16 +42,16 @@ public class EmailSenderServlet extends HttpServlet {
         String topic = req.getParameter("topic");
         String recipients = req.getParameter("recipients");
         String body = req.getParameter("body");
-        boolean isIalidAddress = true;
+        boolean isInvalidAddress = true;
         
         ArrayList<String> recipientList = new ArrayList<String>(); 
         
         for(String recipient: recipients.split(",")){
-            isIalidAddress = isIalidAddress && emailAdressValidator.isEmailAddressValidated(recipient);
+            isInvalidAddress = isInvalidAddress && emailAdressValidator.isEmailAddressValidated(recipient);
             recipientList.add(recipient);
         }
         
-        if (isIalidAddress) {
+        if (isInvalidAddress) {
             mailsender.send(new Mail(topic, body, recipientList));
             result = "result=send success";
         }else{
