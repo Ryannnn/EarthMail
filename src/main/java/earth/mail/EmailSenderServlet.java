@@ -1,5 +1,8 @@
 package earth.mail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,13 +14,14 @@ import earth.mail.send.MailSender;
 public class EmailSenderServlet extends HttpServlet {
     private MailSender mailsender;
     private EmailAddressValidator emailAdressValidator;
-    
+
     public EmailSenderServlet(MailSender sender) {
         this.mailsender = sender;
         this.emailAdressValidator = new EmailAddressValidator();
     }
-    
-    public EmailSenderServlet(MailSender sender, EmailAddressValidator emailAdressValidator) {
+
+    public EmailSenderServlet(MailSender sender,
+            EmailAddressValidator emailAdressValidator) {
         this.mailsender = sender;
         this.emailAdressValidator = emailAdressValidator;
     }
@@ -31,11 +35,15 @@ public class EmailSenderServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws java.io.IOException, ServletException {
+        String topic = req.getParameter("topic");
         String recipients = req.getParameter("recipients");
-        boolean validatedAddress = emailAdressValidator.isEmailAddressValidated(recipients);
-        if(validatedAddress)
-        {
-            mailsender.send(new Mail("", "", recipients));
+        String body = req.getParameter("body");
+        boolean validatedAddress = emailAdressValidator
+                .isEmailAddressValidated(recipients);
+        ArrayList<String> recipientList = new ArrayList<String>(); 
+        if (validatedAddress) {
+            mailsender.send(new Mail(topic, body, recipientList));
+            resp.sendRedirect("index.jsp?result=send success");
         }
     }
 
