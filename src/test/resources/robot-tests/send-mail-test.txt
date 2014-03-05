@@ -1,5 +1,5 @@
 *** Settings ***
-Library  testlib.CheckMail
+Library  earth.mail.testlib.CheckMail
 
 *** Test Cases ***
 Send mail and validate

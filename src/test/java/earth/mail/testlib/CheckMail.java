@@ -1,4 +1,4 @@
-package testlib;
+package earth.mail.testlib;
 
 public class CheckMail {
     
