@@ -1,7 +1,18 @@
 <html>
+<head>
+<title>EarthMail</title>
+<script class="jquery library"
+	src="js/sandbox/jquery/jquery-1.8.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+$(function(){
+	$.ajax();
+})
+</script>
+	
+</head>
 <body>
-	<h2>Hello World!</h2>
-	<form action="/emailSender">
+	<form action="emailSender">
 		<table>
 			<tr>
 				<td>Topic:</td>
@@ -16,11 +27,10 @@
 				<td><textarea id="body"></textarea></td>
 			</tr>
 			<tr>
-                <td>&nbsp;</td>
-                <td><button id="send" name="sendName">Send</button></td>
-            </tr>
+				<td>&nbsp;</td>
+				<td><button id="send" name="sendName">Send</button></td>
+			</tr>
 		</table>
-		
 	</form>
 </body>
 </html>
