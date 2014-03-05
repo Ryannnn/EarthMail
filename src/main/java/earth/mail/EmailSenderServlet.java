@@ -10,13 +10,16 @@ import earth.mail.send.MailSender;
 
 public class EmailSenderServlet extends HttpServlet {
     private MailSender mailsender;
+    private EmailAddressValidator emailAdressValidator;
     
     public EmailSenderServlet(MailSender sender) {
         this.mailsender = sender;
+        this.emailAdressValidator = new EmailAddressValidator();
     }
     
-    public EmailSenderServlet() {
-        this(new MailSender());
+    public EmailSenderServlet(MailSender sender, EmailAddressValidator emailAdressValidator) {
+        this.mailsender = sender;
+        this.emailAdressValidator = emailAdressValidator;
     }
 
     @Override
@@ -28,7 +31,12 @@ public class EmailSenderServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws java.io.IOException, ServletException {
-        mailsender.send(new Mail("", "", ""));
+        String recipients = req.getParameter("recipients");
+        boolean validatedAddress = emailAdressValidator.isEmailAddressValidated(recipients);
+        if(validatedAddress)
+        {
+            mailsender.send(new Mail("", "", recipients));
+        }
     }
 
 }
