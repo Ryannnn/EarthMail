@@ -1,5 +1,5 @@
 *** Settings ***
-
+Library  testlib.CheckMail
 
 *** Test Cases ***
 Send mail and validate
@@ -18,5 +18,5 @@ Send mail
     
 Check mail
     [Arguments]  ${recipients}  ${topic}  ${body}  ${sender}
-    No Operation
+    Mail Exists  ${sender}
 
