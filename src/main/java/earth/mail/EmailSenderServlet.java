@@ -15,9 +15,12 @@ public class EmailSenderServlet extends HttpServlet {
     private MailSender mailsender;
     private EmailAddressValidator emailAdressValidator;
 
+    public EmailSenderServlet( ) {
+        this(new MailSender());
+    }
+    
     public EmailSenderServlet(MailSender sender) {
-        this.mailsender = sender;
-        this.emailAdressValidator = new EmailAddressValidator();
+        this(sender,new EmailAddressValidator());
     }
 
     public EmailSenderServlet(MailSender sender,
@@ -35,16 +38,26 @@ public class EmailSenderServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws java.io.IOException, ServletException {
+        String result = "";
         String topic = req.getParameter("topic");
         String recipients = req.getParameter("recipients");
         String body = req.getParameter("body");
-        boolean validatedAddress = emailAdressValidator
-                .isEmailAddressValidated(recipients);
+        boolean isIalidAddress = true;
+        
         ArrayList<String> recipientList = new ArrayList<String>(); 
-        if (validatedAddress) {
-            mailsender.send(new Mail(topic, body, recipientList));
-            resp.sendRedirect("index.jsp?result=send success");
+        
+        for(String recipient: recipients.split(",")){
+            isIalidAddress = isIalidAddress && emailAdressValidator.isEmailAddressValidated(recipient);
+            recipientList.add(recipient);
         }
+        
+        if (isIalidAddress) {
+            mailsender.send(new Mail(topic, body, recipientList));
+            result = "result=send success";
+        }else{
+            result = "result=email invalid";
+        }
+        resp.sendRedirect("index.jsp?"+result);
     }
 
 }
