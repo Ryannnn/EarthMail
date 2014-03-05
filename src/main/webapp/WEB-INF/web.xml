@@ -10,8 +10,19 @@
     <servlet-class>earth.mail.HelloWorld</servlet-class>
   </servlet>
   
+  <servlet>
+    <servlet-name>emailAddressValidate</servlet-name>
+    <servlet-class>earth.mail.EmailSenderServlet</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>hello</servlet-name>
     <url-pattern>/hello</url-pattern>
   </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>emailSenderServlet</servlet-name>
+    <url-pattern>/emailSender</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
