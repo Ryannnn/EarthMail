@@ -3,22 +3,12 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  
+  <display-name>EarthMail</display-name>
+    
   <servlet>
-    <servlet-name>hello</servlet-name>
-    <servlet-class>earth.mail.HelloWorld</servlet-class>
-  </servlet>
-  
-  <servlet>
-    <servlet-name>emailAddressValidate</servlet-name>
+    <servlet-name>emailSenderServlet</servlet-name>
     <servlet-class>earth.mail.EmailSenderServlet</servlet-class>
   </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>hello</servlet-name>
-    <url-pattern>/hello</url-pattern>
-  </servlet-mapping>
   
   <servlet-mapping>
     <servlet-name>emailSenderServlet</servlet-name>
