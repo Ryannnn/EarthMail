@@ -1,6 +1,9 @@
 package earth.mail.send;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
+
 import earth.mail.send.Mail;
 import earth.mail.send.MailSender;
 
@@ -11,12 +14,13 @@ public class MailSenderTest {
 
     @Test
     public void send_correct_mail_content() throws Exception {
-        Mail mail = new Mail("topic", "body", "zhoutaoo@foxmail.com");
-
+        ArrayList<String> list =new ArrayList<String>();
+        
+        list.add("zhoutaoo@foxmail.com");
+        list.add("wuhzh719@163.com");
+        Mail mail = new Mail("topic", "body",list);
         mailSender.send(mail);
-
-        fakeSender.verifyMailSent("topic", "body", "zhoutaoo@foxmail.com",
-                "earthmailuser@163.com");
+        fakeSender.verifyMailSent("topic", "body", list,"earthmailuser@163.com");
     }
 
 }

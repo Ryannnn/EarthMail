@@ -1,26 +1,28 @@
 <html>
+<head>
+<title>EarthMail</title>
+</head>
 <body>
-	<h2>Hello World!</h2>
-	<form action="/emailSender">
+	${param['result']}
+	<form action="emailSender" method="post">
 		<table>
 			<tr>
 				<td>Topic:</td>
-				<td><input type="text" id="topic" name="topicName"></td>
+				<td><input type="text" id="topic" name="topic"></td>
 			</tr>
 			<tr>
 				<td>Recipients:</td>
-				<td><input type="text" id="recipients"><br></td>
+				<td><input type="text" id="recipients" name="recipients"><br></td>
 			</tr>
 			<tr>
 				<td>Body:</td>
-				<td><textarea id="body"></textarea></td>
+				<td><textarea id="body" name="body"></textarea></td>
 			</tr>
 			<tr>
-                <td>&nbsp;</td>
-                <td><button id="send" name="sendName">Send</button></td>
-            </tr>
+				<td>&nbsp;</td>
+				<td><button id="send" name="sendName">Send</button></td>
+			</tr>
 		</table>
-		
 	</form>
 </body>
-</html>
+</html>      

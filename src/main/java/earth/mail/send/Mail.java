@@ -1,23 +1,16 @@
 package earth.mail.send;
 
+import java.util.ArrayList;
+
 public class Mail {
 
-    // 邮件主题
-    private String topic;
-    // 邮件的文本内容
-    private String body;
-    // 邮件接收者的地址
-    private String recipients;
+    private final String topic;
 
-    public String getRecipients() {
-        return recipients;
-    }
+    private final String body;
 
-    public void setRecipients(String recipients) {
-        this.recipients = recipients;
-    }
+    private final ArrayList<String> recipients;
 
-    public Mail(String topic, String body, String recipients) {
+    public Mail(String topic, String body,  ArrayList<String> recipients) {
         this.topic = topic;
         this.body = body;
         this.recipients = recipients;
@@ -29,6 +22,10 @@ public class Mail {
 
     public String getBody() {
         return body;
+    }
+
+    public ArrayList<String> getRecipients() {
+        return recipients;
     }
 
 }
