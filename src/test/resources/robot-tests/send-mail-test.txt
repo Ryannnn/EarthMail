@@ -1,0 +1,22 @@
+*** Settings ***
+Library  earth.mail.testlib.CheckMail
+
+*** Test Cases ***
+Send mail and validate
+    [Template]  Send mail and validate
+    Topic  foamtea30@gmail.com,csd@chaifeng.com  Body
+    
+*** Keywords ***
+Send mail and validate
+    [Arguments]  ${topic}  ${recipients}  ${body}
+    Send mail  ${topic}  ${recipients}  ${body}
+    Check mail  ${recipients}  ${topic}  ${body}  iamnotman88@126.com
+    
+Send mail
+    [Arguments]  ${topic}  ${recipients}  ${body}
+    No Operation
+    
+Check mail
+    [Arguments]  ${recipients}  ${topic}  ${body}  ${sender}
+    Mail Exists  ${sender}
+
