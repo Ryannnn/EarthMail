@@ -15,12 +15,12 @@ public class EmailSenderServlet extends HttpServlet {
     private MailSender mailsender;
     private EmailAddressValidator emailAdressValidator;
 
-    public EmailSenderServlet( ) {
+    public EmailSenderServlet() {
         this(new MailSender());
     }
-    
+
     public EmailSenderServlet(MailSender sender) {
-        this(sender,new EmailAddressValidator());
+        this(sender, new EmailAddressValidator());
     }
 
     public EmailSenderServlet(MailSender sender,
@@ -42,22 +42,25 @@ public class EmailSenderServlet extends HttpServlet {
         String topic = req.getParameter("topic");
         String recipients = req.getParameter("recipients");
         String body = req.getParameter("body");
-        boolean isInvalidAddress = true;
-        
-        ArrayList<String> recipientList = new ArrayList<String>(); 
-        
-        for(String recipient: recipients.split(",")){
-            isInvalidAddress = isInvalidAddress && emailAdressValidator.isEmailAddressValidated(recipient);
-            recipientList.add(recipient);
+        boolean isValidAddress = true;
+
+        ArrayList<String> recipientList = new ArrayList<String>();
+
+        for (String recipient : recipients.split(",")) {
+            isValidAddress = emailAdressValidator
+                    .isEmailAddressValidated(recipient);
+            if (isValidAddress) {
+                recipientList.add(recipient);
+            }
         }
-        
-        if (isInvalidAddress) {
+
+        if (recipientList.size() > 0) {
             mailsender.send(new Mail(topic, body, recipientList));
             result = "result=send success";
-        }else{
-            result = "result=email invalid";
+        } else {
+            result = "result=no validated email address";
         }
-        resp.sendRedirect("index.jsp?"+result);
+        resp.sendRedirect("index.jsp?" + result);
     }
 
 }

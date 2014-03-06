@@ -1,6 +1,6 @@
 package earth.mail.send;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Mail {
 
@@ -8,9 +8,9 @@ public class Mail {
 
     private final String body;
 
-    private final ArrayList<String> recipients;
+    private final List<String> recipients;
 
-    public Mail(String topic, String body,  ArrayList<String> recipients) {
+    public Mail(String topic, String body,  List<String> recipients) {
         this.topic = topic;
         this.body = body;
         this.recipients = recipients;
@@ -24,7 +24,7 @@ public class Mail {
         return body;
     }
 
-    public ArrayList<String> getRecipients() {
+    public List<String> getRecipients() {
         return recipients;
     }
 

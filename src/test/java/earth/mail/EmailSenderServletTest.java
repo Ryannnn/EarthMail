@@ -21,7 +21,15 @@ public class EmailSenderServletTest {
     private EmailSenderServlet emailSenderServlet;
     private HttpServletRequest request;
     private HttpServletResponse response;
-
+    private final String VALIDATED_ADDRESS ="henry@163.com";
+    private final String NONEXISTED_ADDRESS ="123@123.com";
+    private final String INVALIDATED_ADDRESS ="henry";
+    
+    private void mockTopicAndBody() {
+        when(request.getParameter("topic")).thenReturn("Subject");
+        when(request.getParameter("body")).thenReturn("Email content");
+    }
+    
     @Before
     public void setUp() {
         sender = mock(MailSender.class);
@@ -35,11 +43,8 @@ public class EmailSenderServletTest {
 
     @Test
     public void servlet_one_mail_validator_pass() throws Exception {
-
-        when(request.getParameter("topic")).thenReturn("Subject");
-        when(request.getParameter("body")).thenReturn("Email content");
-        when(request.getParameter("recipients")).thenReturn("henry@163.com");
-
+        mockTopicAndBody();
+        when(request.getParameter("recipients")).thenReturn(VALIDATED_ADDRESS);
         emailSenderServlet.doPost(request, response);
         verify(sender).send(any(Mail.class));
     }
@@ -47,11 +52,9 @@ public class EmailSenderServletTest {
     @Test
     public void servlet_two_mail_validator_pass() throws Exception {
 
-        when(request.getParameter("topic")).thenReturn("Subject");
-        when(request.getParameter("body")).thenReturn("Email content");
+        mockTopicAndBody();
         when(request.getParameter("recipients")).thenReturn(
-                "henry@163.com,123@123.com");
-
+                VALIDATED_ADDRESS + "," + NONEXISTED_ADDRESS);
         emailSenderServlet.doPost(request, response);
         verify(sender).send(any(Mail.class));
     }
@@ -59,10 +62,8 @@ public class EmailSenderServletTest {
     @Test
     public void servlet_one_mail_validator_fail() throws Exception {
 
-        when(request.getParameter("topic")).thenReturn("Subject");
-        when(request.getParameter("body")).thenReturn("Email content");
-        when(request.getParameter("recipients")).thenReturn("henry");
-
+        mockTopicAndBody();
+        when(request.getParameter("recipients")).thenReturn(INVALIDATED_ADDRESS);
         emailSenderServlet.doPost(request, response);
         verify(sender, Mockito.never()).send(any(Mail.class));
     }
