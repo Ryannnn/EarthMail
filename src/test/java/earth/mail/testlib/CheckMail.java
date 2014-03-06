@@ -35,9 +35,6 @@ public class CheckMail {
         try {
             int j = message.length - 1;
             for (int i = j; i >= 0; i--) {
-                System.out.println("Message " + (i + 1));
-                System.out.println("From : " + ((InternetAddress)message[i].getFrom()[0]).getAddress());
-                System.out.println("Subject : " + message[i].getSubject());
                 if (((InternetAddress)message[i].getFrom()[0]).getAddress().equals(sender))
                     return true;
 

@@ -10,7 +10,7 @@ Send mail and validate
 Send mail and validate
     [Arguments]  ${topic}  ${recipients}  ${body}
     Send mail  ${topic}  ${recipients}  ${body}
-    Check mail  ${recipients}  ${topic}  ${body}  foamtea30@126.com
+    Check mail  ${recipients}  ${topic}  ${body}  iamnotman88@126.com
     
 Send mail
     [Arguments]  ${topic}  ${recipients}  ${body}
