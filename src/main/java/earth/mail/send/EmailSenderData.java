@@ -40,5 +40,15 @@ public class EmailSenderData {
         return smptValue;
     }
     
+    public String getMailServerPort()
+    {
+        String portKey = "mailServerPort";
+        String portValue = hostEmailData.getProperty(portKey);  
+        if(portValue == null){
+            portValue = "";
+        }
+        return portValue;
+    }
+    
     
 }
