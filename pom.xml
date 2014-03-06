@@ -76,7 +76,7 @@
         <artifactId>tomcat-maven-plugin</artifactId>
         <version>1.1</version>
         <configuration>
-          <url><![CDATA[http://earth.local:8080/manager/]]></url>
+          <url><![CDATA[http://localhost:8080/manager/]]></url>
           <username>tomcat</username>
           <password>s3cr3t</password>
           <path>/EarthMail</path>
