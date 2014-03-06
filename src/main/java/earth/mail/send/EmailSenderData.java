@@ -47,6 +47,15 @@ public class EmailSenderData {
         return getProperty("hostEmailPassword");
     }
     
+    public Properties getSenderProperty() {
+        
+        Properties senderProperty = new Properties();
+        senderProperty.put("mail.smtp.host", getSmpt());
+        senderProperty.put("mail.smtp.port", getMailServerPort());
+        senderProperty.put("mail.smtp.auth", "true");
+        return senderProperty;
+    }
+    
     
     private String getProperty(String key) {
         String value = hostEmailData.getProperty(key);
