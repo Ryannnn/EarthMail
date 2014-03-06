@@ -1,0 +1,8 @@
+*** Settings ***
+Library  Selenium2Library
+Test Teardown     Close Browser
+
+*** Test Cases ***
+Open recipients page
+	Open Browser       http://localhost:8080/EarthMail/recipients.jsp
+	Title Should Be    Recipients
