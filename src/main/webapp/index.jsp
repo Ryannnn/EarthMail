@@ -11,7 +11,7 @@
 				<td><input type="text" id="topic" name="topic"></td>
 			</tr>
 			<tr>
-				<td>Recipients:</td>
+				<td><a href="recipients.jsp">Recipients:</a></td>
 				<td><input type="text" id="recipients" name="recipients"><br></td>
 			</tr>
 			<tr>
