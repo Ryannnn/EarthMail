@@ -23,4 +23,11 @@ public class EmailSenderDataTest {
         String expectedPort = "25";
         assertEquals(expectedPort, port);
     }
+    @Test
+    public  void get_corrected_fromAddress () {
+        String fromAddress = senderData.getFromAddress();
+        String expectedFromAddress = "earthmailuser@163.com";
+        assertEquals(expectedFromAddress, fromAddress);
+    }
+   
 }

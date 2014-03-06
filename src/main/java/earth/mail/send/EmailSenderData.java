@@ -6,18 +6,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-
-
 public class EmailSenderData {
     private Properties hostEmailData;
-    
-    public EmailSenderData(String configFile){
+
+    public EmailSenderData(String configFile) {
         hostEmailData = new Properties();
         loadConfigFile(configFile);
     }
-    
-    private void loadConfigFile(String configFile)
-    {
+
+    private void loadConfigFile(String configFile) {
         File propsFile = new File(configFile);
         FileInputStream fis;
         try {
@@ -29,26 +26,25 @@ public class EmailSenderData {
             e.printStackTrace();
         }
     }
-    
-    public String getSmpt()
-    {
-        String smptKey = "mailServerHost";
-        String smptValue = hostEmailData.getProperty(smptKey);  
-        if(smptValue == null){
-            smptValue = "";
-        }
-        return smptValue;
+
+    public String getSmpt() {
+        return getProperty("mailServerHost");
     }
-    
-    public String getMailServerPort()
-    {
-        String portKey = "mailServerPort";
-        String portValue = hostEmailData.getProperty(portKey);  
-        if(portValue == null){
-            portValue = "";
-        }
-        return portValue;
+
+    public String getMailServerPort() {
+        return getProperty("mailServerPort");
     }
-    
-    
+
+    public String getFromAddress() {
+        return getProperty("fromAddress");
+    }
+
+    private String getProperty(String key) {
+        String value = hostEmailData.getProperty(key);
+        if (value == null) {
+            value = "";
+        }
+        return value;
+    }
+
 }
