@@ -39,6 +39,15 @@ public class EmailSenderData {
         return getProperty("fromAddress");
     }
 
+    public String getHostEmailUserName() {
+        return getProperty("hostEmailUserName");
+    }
+    
+    public String getHostEmailPassword() {
+        return getProperty("hostEmailPassword");
+    }
+    
+    
     private String getProperty(String key) {
         String value = hostEmailData.getProperty(key);
         if (value == null) {
