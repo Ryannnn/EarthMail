@@ -11,31 +11,26 @@ public class EmailSenderDataTest {
     
     
     @Test
-    public void get_corrected_smpt () { 
+    public void get_corrected_Sender_Data () {
         String smpt = senderData.getSmpt();
         String expectedSmpt = "smtp.163.com";
         assertEquals(expectedSmpt, smpt);
-    }
-    
-    @Test
-    public  void get_corrected_mailServerPort () {
+        
         String port = senderData.getMailServerPort();
         String expectedPort = "25";
         assertEquals(expectedPort, port);
-    }
-    
-    @Test
-    public  void get_corrected_fromAddress () {
+        
         String fromAddress = senderData.getFromAddress();
         String expectedFromAddress = "earthmailuser@163.com";
         assertEquals(expectedFromAddress, fromAddress);
-    }
-    
-    @Test
-    public  void get_corrected_HostEmailUserName () {
+        
         String hostEmailUserName = senderData.getHostEmailUserName();
         String expectedHostEmailUserName = "earthmailuser";
         assertEquals(expectedHostEmailUserName, hostEmailUserName);
+        
+        String hostEmailPassword = senderData.getHostEmailPassword();
+        String expectedHostEmailPassword = "password";
+        assertEquals(expectedHostEmailPassword, hostEmailPassword);
     }
     
    
