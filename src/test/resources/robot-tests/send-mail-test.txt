@@ -1,16 +1,13 @@
 *** Settings ***
 Library  earth.mail.testlib.CheckMail
-Library  Selenium2Library
 Test Teardown     Close Browser
+Resource          resource.txt
 
 
 *** Test Cases ***
 Send mail and validate
     [Template]  Send mail and validate
     csdTopic  foamtea30@gmail.com,csd@chaifeng.com  Body
-
-*** Variables ***  
-${URL}     http://localhost:8080/EarthMail/ 
 
 *** Keywords ***
 Send mail and validate
@@ -24,11 +21,10 @@ Send mail
     Input Text  topic  ${topic}
     Input Text  recipients  ${recipients}
     Input Text  body  ${body}
-    
+
     Click Button  send
-    Page Should contain  send success 
+    Page Should contain  send success
 
 Check mail
-    [Arguments]    ${sender}
+    [Arguments]  ${recipients}  ${topic}  ${body}  ${sender}
     Mail Exists  ${sender}
-
