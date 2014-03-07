@@ -8,15 +8,15 @@
 		<table>
 			<tr>
 				<td>Topic:</td>
-				<td><input type="text" id="topic" name="topic"></td>
+				<td><input type="text" id="topic" name="topic" value="${param['topic']}"></td>
 			</tr>
 			<tr>
 				<td><a href="recipients.jsp">Recipients:</a></td>
-				<td><input type="text" id="recipients" name="recipients"><br></td>
+				<td><input type="text" id="recipients" name="recipients" value="${param['recipients']}"><br></td>
 			</tr>
 			<tr>
 				<td>Body:</td>
-				<td><textarea id="body" name="body"></textarea></td>
+				<td><textarea id="body" name="body">${param['body']}</textarea></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>

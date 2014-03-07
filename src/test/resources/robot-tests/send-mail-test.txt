@@ -29,6 +29,6 @@ Send mail
     Page Should contain  send success 
 
 Check mail
-    [Arguments]  ${recipients}  ${topic}  ${body}  ${sender}
+    [Arguments]    ${sender}
     Mail Exists  ${sender}
 

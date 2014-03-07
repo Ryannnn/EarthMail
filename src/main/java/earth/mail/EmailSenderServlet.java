@@ -38,29 +38,53 @@ public class EmailSenderServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws java.io.IOException, ServletException {
-        String result = "";
+        String errorMessage = "";
         String topic = req.getParameter("topic");
         String recipients = req.getParameter("recipients");
         String body = req.getParameter("body");
-        boolean isValidAddress = true;
 
+        boolean isValidAddress = true;
         ArrayList<String> recipientList = new ArrayList<String>();
 
+        int originalSize, actualSize = 0;
+        originalSize = recipients.split(",").length;
+
         for (String recipient : recipients.split(",")) {
-            isValidAddress = emailAdressValidator
-                    .isEmailAddressValidated(recipient);
+            isValidAddress = emailAdressValidator.isEmailAddressValidated(recipient);
             if (isValidAddress) {
                 recipientList.add(recipient);
+                actualSize++;
             }
+
+        }
+        
+        String container = "";
+        if (topic.equals("")) {
+            errorMessage = "please input mail topic ";
+            
+            container = "index.jsp?result=" + errorMessage + "&body=" + body
+                    + "&topic=" + topic + "&recipients=" + recipients;
+        } else if (body.equals("")) {
+            errorMessage = "please input mail content ";
+            container = "index.jsp?result=" + errorMessage + "&body=" + body
+                    + "&topic=" + topic + "&recipients=" + recipients;
+        } else if (actualSize != originalSize && actualSize != 0) {
+            errorMessage = "sent, but some address are invalidated";
+            container = "index.jsp?result=" + errorMessage + "&body=" + body
+                    + "&topic=" + topic + "&recipients=" + recipients;
+        } else if (actualSize == 0) {
+            errorMessage = "no validated email address";
+            container = "index.jsp?result=" + errorMessage + "&body=" + body
+                    + "&topic=" + topic + "&recipients=" + recipients;
+        } else {
+            errorMessage = "send.";
+            container = "index.jsp?result=" + errorMessage;
         }
 
-        if (recipientList.size() > 0) {
+        if (actualSize > 0) {
             mailsender.send(new Mail(topic, body, recipientList));
-            result = "result=send success";
-        } else {
-            result = "result=no validated email address";
         }
-        resp.sendRedirect("index.jsp?" + result);
+        resp.sendRedirect(container);
     }
 
 }
