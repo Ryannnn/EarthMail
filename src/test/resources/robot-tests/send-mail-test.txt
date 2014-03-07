@@ -23,7 +23,7 @@ Send mail
     Input Text  body  ${body}
 
     Click Button  send
-    Page Should contain  send success
+    Page Should contain  send.
 
 Check mail
     [Arguments]  ${recipients}  ${topic}  ${body}  ${sender}
