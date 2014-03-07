@@ -7,23 +7,32 @@ Resource          resource.txt
 *** Test Cases ***
 Send mail and validate
     [Template]  Send mail and validate
-    csdTopic  foamtea30@gmail.com,csd@chaifeng.com  Body
+    csdTopic  foamtea30@gmail.com,csd@chaifeng.com  Body  ${SendSuccessALl}
+    csdTopic  wrongEmail  Body  ${SendFail}
+    csdTopic  foamtea30@gmail.com,wrongEmail Body  ${SendSuccessPart}
+
+*** Variables ***  
+${URL}     http://localhost:8080/EarthMail/
+${SendSuccessALl}    send
+${SendSuccessPart}    part
+${SendFail}    no
 
 *** Keywords ***
 Send mail and validate
-    [Arguments]  ${topic}  ${recipients}  ${body}
+    [Arguments]  ${topic}  ${recipients}  ${body} ${result}
     Send mail  ${topic}  ${recipients}  ${body}
     Check mail  ${recipients}  ${topic}  ${body}  iamnotman88@126.com
 
 Send mail
-    [Arguments]  ${topic}  ${recipients}  ${body}
+    [Arguments]  ${topic}  ${recipients}  ${body} ${result}
     Open Browser  ${URL}
     Input Text  topic  ${topic}
     Input Text  recipients  ${recipients}
     Input Text  body  ${body}
 
     Click Button  send
-    Page Should contain  send.
+    
+    Page Should contain  ${result} 
 
 Check mail
     [Arguments]  ${recipients}  ${topic}  ${body}  ${sender}

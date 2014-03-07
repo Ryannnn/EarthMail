@@ -51,6 +51,37 @@
         <version>1.4</version>
     </dependency>
   </dependencies>
+  
+  <profiles>
+    <profile>
+      <id>SlowTest</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <!-- 
+            <dependencies>
+              <dependency>
+                <groupId>org.apache.maven.surefire</groupId>
+                <artifactId>surefire-junit47</artifactId>
+                <version>2.16</version>
+              </dependency>
+            </dependencies>
+             -->
+            <configuration>
+              <groups>earth.mail.testlib.SlowTests</groups>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+  
+ 
   <build>
     <finalName>EarthMail</finalName>
     <plugins>
@@ -71,6 +102,22 @@
         </configuration>
       </plugin>
 
+<!-- 
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>org.apache.maven.surefire</groupId>
+                <artifactId>surefire-junit47</artifactId>
+                <version>2.16</version>
+              </dependency>
+            </dependencies>
+            <configuration>
+              <groups>earth.mail.testlib.SlowTests</groups>
+            </configuration>
+          </plugin>
+ -->
       <!--remote tomcat deploy-->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
