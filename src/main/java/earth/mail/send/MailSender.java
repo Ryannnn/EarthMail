@@ -13,13 +13,9 @@ import javax.mail.internet.MimeMessage;
 
 public class MailSender {
 
-    private final String mailServerHost = "smtp.163.com";
-    private final String mailServerPort = "25";
-    private final String fromAddress = "earthmailuser@163.com";
-    private final String userName = "earthmailuser";
-    private final String password = "password";
     private Session sendMailSession;
     private Sender sender;
+    EmailSenderData data = new EmailSenderData("HostEmailData.properties");
 
     private Properties property = new Properties();
 
@@ -33,14 +29,12 @@ public class MailSender {
     }
 
     public void initProperties() {
-        property.put("mail.smtp.host", this.mailServerHost);
-        property.put("mail.smtp.port", this.mailServerPort);
-        property.put("mail.smtp.auth", "true");
+        property = data.getSenderProperty();
     }
 
     private void initSender() {
-        Authenticator authenticator = new EarthMailAuthenticator(userName,
-                password);
+        Authenticator authenticator = new EarthMailAuthenticator(data.getHostEmailUserName(),
+                data.getHostEmailPassword());
         sendMailSession = Session.getDefaultInstance(property, authenticator);
         this.sender = new TransportSender();
     }
@@ -59,7 +53,7 @@ public class MailSender {
     private Message toMailMassage(Mail mail) throws AddressException,
             MessagingException {
         Message mailMessage = new MimeMessage(sendMailSession);
-        Address from = new InternetAddress(fromAddress);
+        Address from = new InternetAddress(data.getFromAddress());
         mailMessage.setFrom(from);
         for (String address : mail.getRecipients()) {
             Address to = new InternetAddress(address);
