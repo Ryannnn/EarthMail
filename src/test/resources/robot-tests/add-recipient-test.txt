@@ -1,0 +1,8 @@
+*** Settings ***
+Test Teardown     Close Browser
+Resource          resource.txt
+
+*** Test Cases ***
+Open recipients page
+	Open Browser       ${URL}/recipients.jsp
+	Title Should Be    Recipients
